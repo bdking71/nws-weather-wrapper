@@ -60,7 +60,7 @@ export interface ForecastResponse {
 /**
  * A client for the National Weather Service (NWS) API.
  */
-export class NwsApi {
+export class NwsWeatherWrapper {
     private readonly axiosInstance: AxiosInstance;
 
     /**
@@ -89,7 +89,7 @@ export class NwsApi {
      * @param longitude The longitude.
      * @returns A promise that resolves to the points response.
      */
-    public async getPoints(latitude: number, longitude: number): Promise<PointsResponse> {
+    public async getPoints(latitude: string, longitude: string): Promise<PointsResponse> {
         const response = await this.axiosInstance.get<PointsResponse>(`/points/${latitude},${longitude}`);
         return response.data;
     }

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { NwsApi, PointsResponse, ForecastResponse } from '../src/index';
+import { NwsWeatherWrapper, PointsResponse, ForecastResponse } from '../src/index';
 
-describe('NwsApi', () => {
+describe('NwsWeatherWrapper', () => {
     let mock: MockAdapter;
     const userAgent = 'test-app, test@example.com';
 
@@ -20,18 +20,18 @@ describe('NwsApi', () => {
 
     it('should throw an error if no user agent is provided', () => {
         // Test that creating an instance with an empty user agent string throws an error.
-        expect(() => new NwsApi('')).toThrow('A user agent is required to use the NWS API.');
+        expect(() => new NwsWeatherWrapper('')).toThrow('A user agent is required to use the NWS API.');
     });
 
     it('should create an instance with a valid user agent', () => {
         // Test that a valid user agent does not throw an error.
-        expect(() => new NwsApi(userAgent)).not.toThrow();
+        expect(() => new NwsWeatherWrapper(userAgent)).not.toThrow();
     });
 
     describe('getPoints', () => {
         it('should fetch gridpoint data for a given lat/lon', async () => {
-            const lat = 39.7456;
-            const lon = -97.0892;
+            const lat:string = '39.7456';
+            const lon:string = '-97.0892';
             const mockData: PointsResponse = {
                 properties: {
                     gridId: 'TOP',
@@ -47,7 +47,7 @@ describe('NwsApi', () => {
             // Mock the GET request to the points endpoint
             mock.onGet(`https://api.weather.gov/points/${lat},${lon}`).reply(200, mockData);
 
-            const api = new NwsApi(userAgent);
+            const api = new NwsWeatherWrapper(userAgent);
             const data = await api.getPoints(lat, lon);
 
             // Assert that the returned data matches the mock data
@@ -95,7 +95,7 @@ describe('NwsApi', () => {
             // Mock the GET request to the forecast endpoint
             mock.onGet(`https://api.weather.gov/gridpoints/${office}/${gridX},${gridY}/forecast`).reply(200, mockData);
 
-            const api = new NwsApi(userAgent);
+            const api = new NwsWeatherWrapper(userAgent);
             const data = await api.getForecast(office, gridX, gridY);
 
             // Assert that the returned data matches the mock data

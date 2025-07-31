@@ -8,7 +8,7 @@ This library provides a convenient way to interact with the NWS API to retrieve 
 
 ## Version
 
-  2025.0731.1037 Alpha (Untested / Not Ready for Production)
+  2025.0731.1446 Alpha (Untested / Not Ready for Production)
 
 ## Features
 
@@ -27,38 +27,60 @@ npm install @bdking71/nws-weather-wrapper
 Here's a basic example of how to use the library:
 
 ```typescript
-import { NwsApi } from 'nws-api-wrapper';
+// Import necessary types and the NWS API wrapper class from the 'nws-api-wrapper' package
+import { ForecastResponse, PointsResponse, NwsWeatherWrapper } from 'nws-api-wrapper';
 
-// You must provide a User-Agent, as required by the NWS API.
-// See the NWS API documentation for more details.
+// Define a user agent string, which is **required by NWS API** per their usage policy
+// Replace 'my-contact-email@example.com' with your actual email or website
 const userAgent = 'My Weather App, my-contact-email@example.com';
-const api = new NwsApi(userAgent);
 
-// Latitude and longitude for a location (e.g., somewhere in Kansas)
-const latitude = 39.7456;
-const longitude = -97.0892;
+// Create an instance of the NWS API wrapper using your user agent
+const nwsAPI = new NwsWeatherWrapper(userAgent);
 
-async function getForecast() {
-  try {
-    // 1. Get the gridpoint information
-    const points = await api.getPoints(latitude, longitude);
-    const { gridId, gridX, gridY } = points.properties;
+// Define the coordinates for which you want to retrieve the forecast
+const latitude: string | undefined = '39.7456';
+const longitude: string | undefined = '-97.0892';
 
-    // 2. Get the forecast for the gridpoint
-    const forecast = await api.getForecast(gridId, gridX, gridY);
+// Define an asynchronous function that fetches the forecast for a single location
+const fetchSingleForecastFromNWS = async (): Promise<ForecastResponse> => {
+  // Ensure both latitude and longitude are defined before continuing
+  if (!latitude || !longitude) {
+    throw new Error('Latitude and longitude are required.');
+  }
 
-    // 3. Log the forecast periods
-    forecast.properties.periods.forEach(period => {
+  // Step 1: Use the NWS API to get the "gridpoint" information for this location
+  // This provides the grid ID and coordinates (gridX, gridY) for the forecast query
+  const points: PointsResponse = await nwsAPI.getPoints(latitude, longitude);
+
+  // Step 2: Use the gridpoint data to get the full forecast from the NWS API
+  const forecast: ForecastResponse = await nwsAPI.getForecast(
+    points.properties.gridId,
+    points.properties.gridX,
+    points.properties.gridY
+  );
+
+  // Step 3: Return the full forecast object to the caller
+  return forecast;
+};
+
+// Call the function and handle the result using .then()/.catch()
+// This is your app's entry point for outputting the forecast
+fetchSingleForecastFromNWS()
+  .then((forecast) => {
+    // Log the timestamp of the forecast update
+    console.log(`Forecast for ${forecast.properties.updated}:`);
+
+    // Loop through each forecast period (e.g., Today, Tonight, Tomorrow) and log its details
+    forecast.properties.periods.forEach((period) => {
       console.log(`${period.name}: ${period.detailedForecast}`);
     });
-
-  } catch (error) {
-    console.error('Failed to fetch weather data:', error);
-  }
-}
-
-getForecast();
+  })
+  .catch((error) => {
+    // If anything goes wrong (bad coordinates, network issue, API error), log it here
+    console.error('Failed to fetch forecast:', error);
+  });
 ```
+
 
 ## Documentation
 
