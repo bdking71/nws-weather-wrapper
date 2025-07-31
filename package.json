@@ -1,17 +1,47 @@
 {
-  "name": "nws-api-wrapper",
-  "version": "1.0.0",
+  "name": "@bdking71/nws-api-wrapper",
+  "version": "2025.07.31.1037",
   "description": "A TypeScript wrapper for the National Weather Service (NWS) API.",
+  "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": ">=14"
+  },
+  "author": {
+    "name": "Bryan King",
+    "url": "https://bdking71.wordpress.com"
+  },
+  "homepage": "https://bdking71.wordpress.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bdking71/nws-api-wrapper"
+  },
+  "bugs": {
+    "url": "https://github.com/bdking71/nws-api-wrapper/issues"
+  },
+  "keywords": [
+    "weather",
+    "nws",
+    "national weather service",
+    "typescript",
+    "api",
+    "wrapper",
+    "node"
+  ],
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.0",

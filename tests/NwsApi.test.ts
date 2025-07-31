@@ -8,12 +8,9 @@ describe('NwsApi', () => {
 
     // It's important to use a new mock for each test to prevent interference
     beforeEach(() => {
-        // We need to mock the axios instance used by NwsApi.
-        // Since NwsApi creates its own instance, we can't just mock the global axios.
-        // A better approach for highly testable code would be to inject axios,
-        // but for this library's scope, we'll stick to this.
-        // For the purpose of this test, we will assume the mock adapter works on the created instance.
-        // In a real scenario, we might need to use jest.spyOn to intercept the axios.create call.
+        // We are mocking the global axios instance. Because NwsApi uses axios.create() without
+        // providing a custom adapter, it will use the same adapter as the global instance,
+        // so our mock will intercept calls from the NwsApi instance.
         mock = new MockAdapter(axios);
     });
 
@@ -56,7 +53,8 @@ describe('NwsApi', () => {
             // Assert that the returned data matches the mock data
             expect(data).toEqual(mockData);
             // Assert that the correct URL was called
-            expect(mock.history.get[0].url).toBe(`https://api.weather.gov/points/${lat},${lon}`);
+            // Note: axios-mock-adapter records the relative path when a baseURL is used.
+            expect(mock.history.get[0].url).toBe(`/points/${lat},${lon}`);
         });
     });
 
@@ -103,7 +101,8 @@ describe('NwsApi', () => {
             // Assert that the returned data matches the mock data
             expect(data).toEqual(mockData);
             // Assert that the correct URL was called
-            expect(mock.history.get[0].url).toBe(`https://api.weather.gov/gridpoints/${office}/${gridX},${gridY}/forecast`);
+            // Note: axios-mock-adapter records the relative path when a baseURL is used.
+            expect(mock.history.get[0].url).toBe(`/gridpoints/${office}/${gridX},${gridY}/forecast`);
         });
     });
 });
