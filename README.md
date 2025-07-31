@@ -6,6 +6,10 @@ A simple TypeScript wrapper for the National Weather Service (NWS) API.
 
 This library provides a convenient way to interact with the NWS API to retrieve weather forecasts. It handles the API endpoints for getting grid data from latitude and longitude, and then fetching the forecast for that grid.
 
+## Version
+
+  2025.0731.1037 Alpha (Untested / Not Ready for Production)
+
 ## Features
 
 -   Simple, promise-based API.
@@ -65,4 +69,4 @@ For more detailed documentation, please see the following files:
 
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under the MIT License.
