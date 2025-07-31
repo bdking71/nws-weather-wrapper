@@ -28,7 +28,7 @@ Here's a basic example of how to use the library:
 
 ```typescript
 // Import necessary types and the NWS API wrapper class from the 'nws-api-wrapper' package
-import { ForecastResponse, PointsResponse, NwsWeatherWrapper } from 'nws-api-wrapper';
+import { ForecastResponse, PointsResponse, NwsWeatherWrapper } from 'npm i @bdking71/nws-weather-wrapper';
 
 // Define a user agent string, which is **required by NWS API** per their usage policy
 // Replace 'my-contact-email@example.com' with your actual email or website
