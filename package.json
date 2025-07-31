@@ -1,5 +1,5 @@
 {
-  "name": "@bdking71/nws-api-wrapper",
+  "name": "@bdking71/nws-weather-wrapper",
   "version": "2025.0731.1037",
   "description": "A TypeScript wrapper for the National Weather Service (NWS) API.",
   "type": "commonjs",
@@ -26,10 +26,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bdking71/nws-api-wrapper"
+    "url": "https://github.com/bdking71/nws-weather-wrapper"
   },
   "bugs": {
-    "url": "https://github.com/bdking71/nws-api-wrapper/issues"
+    "url": "https://github.com/bdking71/nws-weather-wrapper/issues"
   },
   "keywords": [
     "weather",

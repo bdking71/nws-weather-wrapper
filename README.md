@@ -1,4 +1,4 @@
-# NWS API Wrapper
+# NWS Weather Wrapper
 
 A simple TypeScript wrapper for the National Weather Service (NWS) API.
 
@@ -19,7 +19,7 @@ This library provides a convenient way to interact with the NWS API to retrieve 
 ## Installation
 
 ```bash
-npm install nws-api-wrapper --save
+npm install @bdking71/nws-weather-wrapper
 ```
 
 ## Quick Start
