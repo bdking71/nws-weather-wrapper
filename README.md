@@ -8,7 +8,7 @@ This library provides a convenient way to interact with the NWS API to retrieve 
 
 ## Version
 
-  2025.0731.1446 Alpha (Untested / Not Ready for Production)
+  2025.0822.1630 Beta
 
 ## Features
 
@@ -28,7 +28,8 @@ Here's a basic example of how to use the library:
 
 ```typescript
 // Import necessary types and the NWS API wrapper class from the 'nws-api-wrapper' package
-import { ForecastResponse, PointsResponse, NwsWeatherWrapper } from 'npm i @bdking71/nws-weather-wrapper';
+  import { NwsWeatherWrapper } from '@bdking71/nws-weather-wrapper';
+  import type { ForecastResponse, PointsResponse } from '@bdking71/nws-weather-wrapper';
 
 // Define a user agent string, which is **required by NWS API** per their usage policy
 // Replace 'my-contact-email@example.com' with your actual email or website
