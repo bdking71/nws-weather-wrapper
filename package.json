@@ -1,6 +1,6 @@
 {
   "name": "@bdking71/nws-weather-wrapper",
-  "version": "2025.0731.1539",
+  "version": "2025.0822.1328",
   "description": "A TypeScript wrapper for the National Weather Service (NWS) API.",
   "type": "commonjs",
   "main": "dist/index.js",
